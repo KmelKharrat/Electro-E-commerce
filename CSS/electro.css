@@ -18,3 +18,6 @@ Body {
 .hot-deal {
     background-image: url(../Assets/hotdeal.png);
 }
+.show {
+    display: block;
+}

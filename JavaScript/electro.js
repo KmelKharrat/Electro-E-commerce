@@ -3,7 +3,7 @@ let buttons = document.querySelectorAll(".alert-btn");
 buttons.forEach(button => {
     button.onclick = function showAlert() {
         Swal.fire({
-          title: "Added To Caret Successfully",
+          title: "Added To Cart Successfully",
           icon: "success",
         });
     }
@@ -19,17 +19,24 @@ let topArrow = document.querySelector(".scroll-top");
 topArrow.onclick = function() {
     scrollTo(0, 0);
 };
-// select elements
-let icon = document.querySelector(".a-caret");
-let caret = document.querySelector(".caret-list");
-icon.addEventListener("click", function() {
-    if (caret.style.visibility === "visible") {
-        caret.style.visibility = "hidden";
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 500) {
+        topArrow.classList.add("show");
     } else {
-        caret.style.visibility = "visible";
+        topArrow.classList.remove("show");
     }
 });
-// create card
+// select elements
+let icon = document.querySelector(".a-cart");
+let cart = document.querySelector(".cart-list");
+icon.addEventListener("click", function() {
+    if (cart.style.visibility === "visible") {
+        cart.style.visibility = "hidden";
+    } else {
+        cart.style.visibility = "visible";
+    }
+});
+// Create Card
 buttons.forEach(button => {
     button.addEventListener("click", function(e) {
         // Create Elements
@@ -50,19 +57,16 @@ buttons.forEach(button => {
         productPrice.textContent = price;
         button.innerHTML = "x";
         // Append Child
-        card.appendChild(imageDiv);
         imageDiv.appendChild(theImage);
-        card.appendChild(text);
-        text.appendChild(productTitle);
-        text.appendChild(productPrice);
-        card.appendChild(button);
-        caret.appendChild(card);
-        // remove card
+        text.append(productTitle, productPrice)
+        card.append(imageDiv, text, button)
+        cart.appendChild(card);
+        // Remove Card
         button.addEventListener("click", function(e) {
             card.remove();
         });
         // CSS Styling
-        caret.style.cssText = "z-index: 40; bottom: -100px; right: 0px; box-shadow: 0px 0px 0px 2px #E4E7ED; visibility :hidden; overflow: scroll; height: 100px; width: 275px; background: white;";
+        cart.style.cssText = "z-index: 40; bottom: -100px; right: 0px; box-shadow: 0px 0px 0px 2px #E4E7ED; visibility :hidden; overflow: scroll; height: 100px; width: 275px; background: white;";
         card.style.cssText = "background-color: white; display: flex; justify-content: space-between; padding: 5px; font-weight: 500; font-size: 15px; align-items: center; border-bottom: 1px solid #d10024; height: 100%;";
         imageDiv.style.cssText = "width: 40%;";
         button.style.cssText = "width: 25px; height: 23px; background-color: #d10024; color: white; border-radius: 25px;"
